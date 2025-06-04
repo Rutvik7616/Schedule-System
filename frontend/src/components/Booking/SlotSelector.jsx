@@ -4,7 +4,7 @@ const SlotSelector = ({ slots, selectedSlot, onSelect }) => {
   if (!slots || slots.length === 0) {
     return (
       <div className="text-center py-4">
-        <p className="text-gray-500">No available slots for this date</p>
+        <p className="text-gray-500">No available slots for this Date</p>
       </div>
     );
   }
