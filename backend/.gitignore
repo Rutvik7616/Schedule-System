@@ -16,7 +16,6 @@ server/localdev-config.json
 # misc
 .DS_Store
 .env.development
-.env
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
