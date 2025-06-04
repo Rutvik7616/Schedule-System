@@ -1,21 +1,15 @@
 const Availability = require('../models/Availability');
-const { format, parse } = require('date-fns');
-
-const convertDateFormat = (dateStr) => {
-  try {
-    const parsedDate = parse(dateStr, 'dd/MM/yyyy', new Date());
-    return format(parsedDate, 'yyyy-MM-dd');
-  } catch (err) {
-    throw new Error('Invalid date format. Please use DD/MM/YYYY');
-  }
-};
 
 exports.createAvailability = async (req, res) => {
   try {
     const { date, startTime, endTime } = req.body;
     const userId = req.user.id;
 
-    const formattedDate = convertDateFormat(date);
+    // Validate date format (DD/MM/YYYY)
+    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+    if (!dateRegex.test(date)) {
+      return res.status(400).json({ error: 'Invalid date format. Please use DD/MM/YYYY' });
+    }
 
     const timeRegex = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
     if (!timeRegex.test(startTime) || !timeRegex.test(endTime)) {
@@ -30,17 +24,12 @@ exports.createAvailability = async (req, res) => {
 
     const availability = await Availability.create({
       userId,
-      date: formattedDate,
+      date, 
       startTime,
       endTime
     });
 
-    const response = {
-      ...availability.toObject(),
-      date: format(parse(availability.date, 'yyyy-MM-dd', new Date()), 'dd/MM/yyyy')
-    };
-
-    res.json(response);
+    res.json(availability);
   } catch (err) {
     res.status(500).json({ error: err.message || 'Failed to create availability' });
   }
