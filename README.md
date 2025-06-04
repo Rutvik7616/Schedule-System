@@ -1,3 +1,5 @@
+
+
 # Schedule System
 
 A modern scheduling and booking system built with React and Node.js, featuring a clean UI with Tailwind CSS.
@@ -29,6 +31,11 @@ A modern scheduling and booking system built with React and Node.js, featuring a
   - Error handling with user feedback
 
 ##  Getting Started
+
+### ENV 
+PORT=5000
+MONGO_URI='mongodb+srv://rutvik:on3TozsZl4RFu1KW@cluster0.z1uayow.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+JWT_SECRET=rutvik7616
 
 ### Prerequisites
 
